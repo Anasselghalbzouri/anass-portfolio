@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/VIASYS/Desktop/anass-portfolio/portfolio/frontend/src//**)",
+      "Read(//c/Users/VIASYS/Desktop/anass-portfolio/portfolio/frontend/**)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
