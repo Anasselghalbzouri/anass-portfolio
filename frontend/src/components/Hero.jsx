@@ -133,7 +133,7 @@ export default function Hero() {
               }}
             >
               <img
-                src="/anass-headshot.png"
+                src={`${import.meta.env.BASE_URL}anass-headshot.png`}
                 alt="Anass EL G."
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
