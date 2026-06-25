@@ -151,9 +151,9 @@ export default function Hero() {
             {/* Stats row */}
             <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
               {[
-                { icon: <Code2 size={14} />, label: '4+', sub: 'Projects' },
-                { icon: <Layers size={14} />, label: '2+', sub: 'Years Coding' },
-                { icon: <Star size={14} />, label: 'A+', sub: 'Student' },
+                // { icon: <Code2 size={14} />, label: '4+', sub: 'Projects' },
+                // { icon: <Layers size={14} />, label: '2+', sub: 'Years Coding' },
+                // { icon: <Star size={14} />, label: 'A+', sub: 'Student' },
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -186,26 +186,7 @@ export default function Hero() {
         {/* Center — Main content */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', zIndex: 2 }}>
           {/* Top badge */}
-          <motion.div variants={fadeUp} custom={0} initial="hidden" animate="visible">
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                background: 'rgba(21,101,192,0.08)',
-                border: '1px solid rgba(21,101,192,0.2)',
-                borderRadius: 9999,
-                padding: '7px 18px',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                color: 'var(--color-primary)',
-              }}
-            >
-              <span style={{ fontSize: '0.9rem' }}>⭐</span>
-              Excellence Group · CMC Tanger
-            </div>
-          </motion.div>
-
+         
           {/* Title */}
           <motion.h1
             variants={fadeUp} custom={1} initial="hidden" animate="visible"
@@ -216,12 +197,7 @@ export default function Hero() {
               color: 'var(--color-text-dark)',
             }}
           >
-            Crafting{' '}
-            <span style={{ color: 'var(--color-primary)', fontStyle: 'italic' }}>
-              Web Experiences
-            </span>
-            <br />
-            That{' '}
+            What If Your{' '}
             <span
               style={{
                 background: 'linear-gradient(90deg, var(--color-primary), var(--color-primary-light))',
@@ -229,7 +205,11 @@ export default function Hero() {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              Inspire
+              Idea
+            </span>
+            <br />
+            <span style={{ color: 'var(--color-primary)', fontStyle: 'italic' }}>
+              Worked?
             </span>
           </motion.h1>
 
@@ -245,8 +225,9 @@ export default function Hero() {
               maxWidth: 460,
             }}
           >
-            Full Stack developer specialised in React &amp; Laravel — turning ideas
-            into fast, beautiful, and functional applications.
+
+            Most clients don’t just need a developer. They need someone who can understand the idea, 
+            structure the solution, and build a web app that actually works. That’s what I do with React and Laravel.
           </motion.p>
 
           {/* CTA Banner */}
@@ -369,7 +350,7 @@ export default function Hero() {
               style={{
                 height: 100,
                 borderRadius: 14,
-                background: 'linear-gradient(135deg, #1565C0 0%, #42A5F5 100%)',
+                background: '#0b1220',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -377,36 +358,30 @@ export default function Hero() {
                 overflow: 'hidden',
               }}
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  opacity: 0.15,
-                  backgroundImage:
-                    'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)',
-                  backgroundSize: '12px 12px',
-                }}
+              <img
+                src={`${import.meta.env.BASE_URL}projects/rhonda_cap_auth.png`}
+                alt="RH ONDA"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
               />
-              <span style={{ fontSize: '2.5rem', zIndex: 1 }}>🛍️</span>
             </div>
 
             <div>
               <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', color: 'var(--color-text-dark)', marginBottom: 4 }}>
-                Watch Store
+                RH ONDA — Gestion RH
               </h4>
               <p style={{ fontSize: '0.78rem', color: 'var(--color-text)', lineHeight: 1.5 }}>
-                E-commerce app with cart, filters & Redux Toolkit
+                HR management app for Al Hoceima Airport with real-time dashboard
               </p>
             </div>
 
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {['React', 'Redux', 'Axios'].map((t) => (
+              {['React 19', 'Laravel 13', 'MySQL'].map((t) => (
                 <span key={t} className="tech-badge" style={{ fontSize: '0.68rem' }}>{t}</span>
               ))}
             </div>
 
             <a
-              href="https://github.com/Anasselghalbzouri"
+              href="https://github.com/Anasselghalbzouri/Rh_onda_ahu"
               target="_blank"
               rel="noopener noreferrer"
               style={{

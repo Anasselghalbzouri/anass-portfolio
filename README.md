@@ -1,9 +1,21 @@
 # Anass El Ghalabzouri — Portfolio
 
-A premium full-stack portfolio website with a **Dreamy 3D Glassmorphism** aesthetic.
+Full Stack Developer specializing in **React** and **Laravel**, based in Tanger, Morocco.
 
-**Frontend**: React 18 + Vite + Framer Motion + Tailwind CSS  
-**Backend**: Laravel 10 REST API
+I build web applications that are clean, functional, and crafted with attention to user experience — from the database schema to the UI detail. Currently available for freelance projects and open to new opportunities.
+
+**Live site:** [anasselghalbzouri.github.io/anass-portfolio](https://anasselghalbzouri.github.io/anass-portfolio)  
+**Contact:** anassreda88@gmail.com
+
+---
+
+## Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React, JavaScript ES6+, Tailwind CSS, Redux Toolkit, Framer Motion |
+| Backend | Laravel, PHP, MySQL, REST API, Eloquent ORM |
+| Tools | Git / GitHub, VS Code, npm, Composer, Scrum / Agile |
 
 ---
 

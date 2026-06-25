@@ -33,6 +33,7 @@ export default function ProjectCard({ project, index = 0 }) {
     demo_url = null,
     year = 2025,
     category = 'Web App',
+    image = null,
   } = project
 
   const gradient = GRADIENT_PRESETS[index % GRADIENT_PRESETS.length]
@@ -57,7 +58,7 @@ export default function ProjectCard({ project, index = 0 }) {
         <div
           style={{
             height: 160,
-            background: gradient,
+            background: image ? '#0b1220' : gradient,
             position: 'relative',
             overflow: 'hidden',
             display: 'flex',
@@ -65,19 +66,29 @@ export default function ProjectCard({ project, index = 0 }) {
             justifyContent: 'center',
           }}
         >
-          {/* Grid texture overlay */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              opacity: 0.12,
-              backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)',
-              backgroundSize: '14px 14px',
-            }}
-          />
-          <span style={{ fontSize: '3.5rem', zIndex: 1, filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))' }}>
-            {emoji}
-          </span>
+          {image ? (
+            <img
+              src={image}
+              alt={title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+            />
+          ) : (
+            <>
+              {/* Grid texture overlay */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  opacity: 0.12,
+                  backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)',
+                  backgroundSize: '14px 14px',
+                }}
+              />
+              <span style={{ fontSize: '3.5rem', zIndex: 1, filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.2))' }}>
+                {emoji}
+              </span>
+            </>
+          )}
 
           {/* Year badge */}
           <div

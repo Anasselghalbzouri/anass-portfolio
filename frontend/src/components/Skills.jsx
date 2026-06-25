@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Monitor, Server, Wrench, Lightbulb, Globe } from 'lucide-react'
 import { getSkills } from '../services/api'
 import useScrollReveal from '../hooks/useScrollReveal'
 
-// Fallback skills data
 const FALLBACK_SKILLS = [
   {
     category: 'Frontend',
-    icon: '🎨',
+    Icon: Monitor,
     color: '#1E88E5',
     skills: [
       { name: 'React',           level: 85 },
@@ -19,7 +19,7 @@ const FALLBACK_SKILLS = [
   },
   {
     category: 'Backend',
-    icon: '⚙️',
+    Icon: Server,
     color: '#0D47A1',
     skills: [
       { name: 'Laravel',         level: 80 },
@@ -31,7 +31,7 @@ const FALLBACK_SKILLS = [
   },
   {
     category: 'Tools & Methods',
-    icon: '🛠️',
+    Icon: Wrench,
     color: '#1565C0',
     skills: [
       { name: 'Git / GitHub',    level: 85 },
@@ -43,7 +43,7 @@ const FALLBACK_SKILLS = [
   },
   {
     category: 'Soft Skills',
-    icon: '💡',
+    Icon: Lightbulb,
     color: '#42A5F5',
     skills: [
       { name: 'Problem Solving', level: 88 },
@@ -54,6 +54,42 @@ const FALLBACK_SKILLS = [
     ],
   },
 ]
+
+function GlassIcon({ Icon, color }) {
+  return (
+    <div
+      style={{
+        width: 48,
+        height: 48,
+        borderRadius: 14,
+        background: `linear-gradient(135deg, ${color}33, ${color}18)`,
+        border: `1px solid ${color}40`,
+        boxShadow: `0 4px 16px ${color}22, inset 0 1px 0 rgba(255,255,255,0.35)`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Glass shine overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '50%',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)',
+          borderRadius: '14px 14px 0 0',
+          pointerEvents: 'none',
+        }}
+      />
+      <Icon size={22} color={color} strokeWidth={1.8} />
+    </div>
+  )
+}
 
 function ProgressBar({ level, color, animate }) {
   return (
@@ -69,7 +105,7 @@ function ProgressBar({ level, color, animate }) {
   )
 }
 
-function SkillCategory({ category, icon, color, skills, index }) {
+function SkillCategory({ category, Icon, color, skills, index }) {
   const [ref, isVisible] = useScrollReveal()
   const [animated, setAnimated] = useState(false)
 
@@ -94,22 +130,7 @@ function SkillCategory({ category, icon, color, skills, index }) {
       >
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '1.5rem' }}>
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 14,
-              background: `${color}18`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.4rem',
-              border: `1px solid ${color}28`,
-              flexShrink: 0,
-            }}
-          >
-            {icon}
-          </div>
+          <GlassIcon Icon={Icon} color={color} />
           <div>
             <h3
               style={{
@@ -176,7 +197,6 @@ export default function Skills() {
     getSkills()
       .then((res) => {
         if (res.data?.data?.length) {
-          // Group by category
           const grouped = res.data.data.reduce((acc, skill) => {
             const cat = acc.find((g) => g.category === skill.category)
             if (cat) {
@@ -184,7 +204,7 @@ export default function Skills() {
             } else {
               acc.push({
                 category: skill.category,
-                icon: '💻',
+                Icon: Monitor,
                 color: '#1565C0',
                 skills: [{ name: skill.name, level: skill.level }],
               })
@@ -292,30 +312,17 @@ export default function Skills() {
                 marginBottom: '1.25rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 10,
+                gap: 12,
               }}
             >
-              <span
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 12,
-                  background: 'rgba(21,101,192,0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.2rem',
-                }}
-              >
-                🌍
-              </span>
+              <GlassIcon Icon={Globe} color="#1565C0" />
               Languages
             </h3>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {[
-                { lang: 'Arabic',   level: 'Native',       flag: '🇲🇦', pct: 100 },
-                { lang: 'French',   level: 'Intermediate', flag: '🇫🇷', pct: 65 },
-                { lang: 'English',  level: 'Intermediate', flag: '🇬🇧', pct: 65 },
+                { lang: 'Arabic',   level: 'Native', },
+                { lang: 'French',   level: 'Intermediate', },
+                { lang: 'English',  level: 'Intermediate',},
               ].map(({ lang, level, flag, pct }) => (
                 <div
                   key={lang}
@@ -329,7 +336,7 @@ export default function Skills() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                     <span style={{ fontWeight: 600, color: 'var(--color-text-dark)', fontSize: '0.88rem' }}>
-                      {flag} {lang}
+                   {lang}
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--color-primary)', fontWeight: 600 }}>
                       {level}

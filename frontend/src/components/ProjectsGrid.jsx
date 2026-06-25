@@ -4,55 +4,46 @@ import { getProjects } from '../services/api'
 import ProjectCard from './ProjectCard'
 import Sparkles from './Sparkles'
 
-// Fallback data — matches Anass's real projects from his CV
+// Fallback data — matches Anass's real GitHub projects
 const FALLBACK_PROJECTS = [
   {
     id: 1,
-    title: 'Watch Store — E-commerce',
+    title: 'CMC Pointage',
     description:
-      'Complete e-commerce application with dynamic cart, product filtering, and global state management via Redux Toolkit. Integrated REST API for product data retrieval and display.',
-    tech_stack: ['React', 'Redux Toolkit', 'Axios', 'JavaScript', 'Bootstrap'],
-    github_url: 'https://github.com/Anasselghalbzouri',
-    demo_url: null,
-    year: 2026,
-    category: 'E-commerce',
-    type: 'frontend',
-  },
-  {
-    id: 2,
-    title: 'Client Management System',
-    description:
-      'Full CRUD Laravel application with authentication, database migrations, and seeders. Responsive interface built with Blade templates and Bootstrap.',
-    tech_stack: ['Laravel', 'PHP', 'MySQL', 'Eloquent ORM', 'Blade'],
-    github_url: 'https://github.com/Anasselghalbzouri',
+      'Application Laravel de gestion de présence pour la Cité des Métiers et des Compétences (CMC) : entrées/sorties des étudiants par scan du CIN, affectation des chambres, demandes, sanctions et visites, avec tableau de bord statistique.',
+    tech_stack: ['Laravel', 'PHP', 'MySQL', 'Vite', 'Pint'],
+    github_url: 'https://github.com/Anasselghalbzouri/cmcpointag1',
     demo_url: null,
     year: 2025,
     category: 'Management',
     type: 'backend',
+    image: `${import.meta.env.BASE_URL}projects/cmc_dashboard.png`,
   },
   {
-    id: 3,
-    title: 'Weather Application',
+    id: 2,
+    title: 'SkyCode — Application Météo',
     description:
-      'Real-time weather app with OpenWeather API integration and city-based search. Clean UI with dynamic weather icons and temperature display.',
-    tech_stack: ['React', 'Axios', 'OpenWeather API', 'JavaScript', 'CSS3'],
-    github_url: 'https://github.com/Anasselghalbzouri',
+      'Application météo moderne avec recherche de ville, détails complets (température ressentie, humidité, vent, pression, lever/coucher du soleil), favoris, et interface au design "Glassmorphism" avec animations.',
+    tech_stack: ['React', 'Redux Toolkit', 'React Router', 'Tailwind CSS', 'OpenWeatherMap API', 'Axios'],
+    github_url: 'https://github.com/Anasselghalbzouri/AnassMeteo',
     demo_url: null,
     year: 2025,
     category: 'API',
     type: 'frontend',
+    image: `${import.meta.env.BASE_URL}projects/meteo_screenshot.png`,
   },
   {
-    id: 4,
-    title: 'Car & Student Manager',
+    id: 3,
+    title: 'RH ONDA — Gestion RH Aéroport Al Hoceima',
     description:
-      'Two full MVC applications with complete CRUD operations. Database relationship management with Eloquent ORM following Laravel best practices.',
-    tech_stack: ['Laravel', 'PHP', 'MySQL', 'Eloquent', 'MVC'],
-    github_url: 'https://github.com/Anasselghalbzouri',
+      'Application web complète de gestion des ressources humaines développée pour l\'aéroport Al Hoceima  Gère le personnel, les congés, les formations et propose un tableau de bord analytique en temps réel (effectifs, pyramide des âges, taux de complétion des formations).',
+    tech_stack: ['React 19', 'Laravel 13', 'PHP 8.3', 'MySQL', 'Docker', 'Sanctum'],
+    github_url: 'https://github.com/Anasselghalbzouri/Rh_onda_ahu',
     demo_url: null,
-    year: 2025,
+    year: 2026,
     category: 'Management',
-    type: 'backend',
+    type: 'fullstack',
+    image: `${import.meta.env.BASE_URL}projects/rhonda_cap_auth.png`,
   },
 ]
 
