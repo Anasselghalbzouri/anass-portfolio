@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Monitor, Server, Wrench, Lightbulb, Globe } from 'lucide-react'
 import { getSkills } from '../services/api'
 import useScrollReveal from '../hooks/useScrollReveal'
+import { useTheme } from '../context/ThemeContext'
 
 const FALLBACK_SKILLS = [
   {
@@ -191,6 +192,7 @@ function SkillCategory({ category, Icon, color, skills, index }) {
 }
 
 export default function Skills() {
+  const { dark } = useTheme()
   const [skillGroups, setSkillGroups] = useState(FALLBACK_SKILLS)
 
   useEffect(() => {
@@ -260,7 +262,7 @@ export default function Skills() {
               marginBottom: '1rem',
             }}
           >
-            ⚡ Expertise
+            Expertise
           </div>
           <h2 className="section-title">
             Technical <span>Skills</span>
@@ -320,29 +322,29 @@ export default function Skills() {
             </h3>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {[
-                { lang: 'Arabic',   level: 'Native', },
-                { lang: 'French',   level: 'Intermediate', },
-                { lang: 'English',  level: 'Intermediate',},
-              ].map(({ lang, level, flag, pct }) => (
+                { lang: 'Arabic',  level: 'Native',       pct: 100 },
+                { lang: 'French',  level: 'Intermediate', pct: 65  },
+                { lang: 'English', level: 'Intermediate', pct: 65  },
+              ].map(({ lang, level, pct }) => (
                 <div
                   key={lang}
                   style={{
                     flex: '1 1 180px',
-                    background: 'rgba(21,101,192,0.04)',
+                    background: dark ? 'rgba(99,179,237,0.07)' : 'rgba(21,101,192,0.04)',
                     borderRadius: 14,
                     padding: '1rem',
-                    border: '1px solid rgba(21,101,192,0.1)',
+                    border: dark ? '1px solid rgba(99,179,237,0.18)' : '1px solid rgba(21,101,192,0.1)',
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                     <span style={{ fontWeight: 600, color: 'var(--color-text-dark)', fontSize: '0.88rem' }}>
-                   {lang}
+                      {lang}
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--color-primary)', fontWeight: 600 }}>
                       {level}
                     </span>
                   </div>
-                  <ProgressBar level={pct} color="#1565C0" animate={true} />
+                  <ProgressBar level={pct} color={dark ? '#63B3ED' : '#1565C0'} animate={true} />
                 </div>
               ))}
             </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { sendContact } from '../services/api'
 import Sparkles from './Sparkles'
+import { useTheme } from '../context/ThemeContext'
 
 const SOCIAL_LINKS = [
   {
@@ -10,6 +11,7 @@ const SOCIAL_LINKS = [
     label: 'GitHub',
     href: 'https://github.com/Anasselghalbzouri',
     color: '#24292e',
+    darkColor: '#e6edf3',
   },
   {
     icon: <Linkedin size={20} />,
@@ -32,6 +34,7 @@ const CONTACT_INFO = [
 ]
 
 export default function Contact() {
+  const { dark } = useTheme()
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState(null) // 'sending' | 'success' | 'error'
@@ -99,7 +102,7 @@ export default function Contact() {
     >
       {/* Blobs */}
       <div className="bg-blob" style={{ width: 500, height: 500, background: 'rgba(21,101,192,0.06)', top: '-5%', right: '-10%', animationDelay: '2s' }} />
-      <div className="bg-blob" style={{ width: 350, height: 350, background: 'rgba(232,245,233,0.5)', bottom: '0', left: '-5%', animationDelay: '0s' }} />
+      <div className="bg-blob" style={{ width: 350, height: 350, background: dark ? 'rgba(99,179,237,0.05)' : 'rgba(232,245,233,0.5)', bottom: '0', left: '-5%', animationDelay: '0s' }} />
       <Sparkles count={8} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -229,7 +232,9 @@ export default function Contact() {
                 Find me on
               </h3>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                {SOCIAL_LINKS.map(({ icon, label, href, color }) => (
+                {SOCIAL_LINKS.map(({ icon, label, href, color, darkColor }) => {
+                  const c = dark && darkColor ? darkColor : color
+                  return (
                   <a
                     key={label}
                     href={href}
@@ -243,21 +248,21 @@ export default function Contact() {
                       gap: 8,
                       padding: '10px 16px',
                       borderRadius: 14,
-                      background: `${color}12`,
-                      color: color,
+                      background: `${c}18`,
+                      color: c,
                       textDecoration: 'none',
                       fontSize: '0.82rem',
                       fontWeight: 600,
-                      border: `1px solid ${color}22`,
+                      border: `1px solid ${c}30`,
                       transition: 'all 0.2s',
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.background = `${color}22`; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                    onMouseLeave={e => { e.currentTarget.style.background = `${color}12`; e.currentTarget.style.transform = 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = `${c}28`; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = `${c}18`; e.currentTarget.style.transform = 'none' }}
                   >
                     {icon}
                     {label}
                   </a>
-                ))}
+                )})}
               </div>
             </div>
           </motion.div>
@@ -338,7 +343,7 @@ export default function Contact() {
                     type="text"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Name"
                     className="glass-input"
                     style={{ borderColor: errors.name ? 'rgba(244,67,54,0.5)' : undefined }}
                     aria-invalid={!!errors.name}
@@ -362,7 +367,7 @@ export default function Contact() {
                     type="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="Email"
                     className="glass-input"
                     style={{ borderColor: errors.email ? 'rgba(244,67,54,0.5)' : undefined }}
                     aria-invalid={!!errors.email}
@@ -385,7 +390,7 @@ export default function Contact() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project or opportunity..."
+                    placeholder="Tell me about your project"
                     rows={5}
                     className="glass-input"
                     style={{

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ChevronDown, Search } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const FILTERS = {
   tech: {
@@ -21,6 +22,7 @@ const FILTERS = {
 }
 
 export default function FilterBar({ activeFilter, setActiveFilter }) {
+  const { dark } = useTheme()
   const [open, setOpen] = useState(null)
 
   const handleSelect = (key, value) => {
@@ -70,8 +72,8 @@ export default function FilterBar({ activeFilter, setActiveFilter }) {
                       gap: 6,
                       background: currentValue !== 'all'
                         ? 'rgba(21,101,192,0.1)'
-                        : 'rgba(255,255,255,0.5)',
-                      border: `1.5px solid ${currentValue !== 'all' ? 'rgba(21,101,192,0.3)' : 'rgba(255,255,255,0.5)'}`,
+                        : (dark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.5)'),
+                      border: `1.5px solid ${currentValue !== 'all' ? 'rgba(21,101,192,0.3)' : (dark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.5)')}`,
                       borderRadius: 10,
                       padding: '8px 14px',
                       fontSize: '0.82rem',
@@ -101,11 +103,11 @@ export default function FilterBar({ activeFilter, setActiveFilter }) {
                         top: 'calc(100% + 6px)',
                         left: 0,
                         minWidth: 150,
-                        background: 'rgba(255,255,255,0.95)',
+                        background: dark ? 'rgba(15,15,35,0.97)' : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255,255,255,0.6)',
+                        border: dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.6)',
                         borderRadius: 14,
-                        boxShadow: '0 12px 40px rgba(31,38,135,0.15)',
+                        boxShadow: dark ? '0 12px 40px rgba(0,0,0,0.4)' : '0 12px 40px rgba(31,38,135,0.15)',
                         overflow: 'hidden',
                         zIndex: 100,
                       }}

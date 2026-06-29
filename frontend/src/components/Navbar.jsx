@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const NAV_LINKS = [
   { label: 'Home',     href: '#home' },
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [scrolled,    setScrolled]    = useState(false)
   const [menuOpen,    setMenuOpen]    = useState(false)
   const [activeLink,  setActiveLink]  = useState('#home')
+  const { dark, toggle } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30)
@@ -42,11 +44,17 @@ export default function Navbar() {
         right: 0,
         zIndex: 1000,
         transition: 'all 0.35s ease',
-        background: scrolled ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.35)',
+        background: scrolled
+          ? (dark ? 'rgba(10,10,26,0.9)' : 'rgba(255,255,255,0.82)')
+          : (dark ? 'rgba(10,10,26,0.4)' : 'rgba(255,255,255,0.35)'),
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.5)' : '1px solid rgba(255,255,255,0.2)',
-        boxShadow: scrolled ? '0 4px 24px rgba(31,38,135,0.1)' : 'none',
+        borderBottom: scrolled
+          ? (dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.5)')
+          : (dark ? '1px solid rgba(255,255,255,0.04)' : '1px solid rgba(255,255,255,0.2)'),
+        boxShadow: scrolled
+          ? (dark ? '0 4px 24px rgba(0,0,0,0.3)' : '0 4px 24px rgba(31,38,135,0.1)')
+          : 'none',
       }}
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68 }}>
@@ -122,6 +130,26 @@ export default function Navbar() {
           >
             LinkedIn
           </a>
+          <button
+            onClick={toggle}
+            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            style={{
+              background: dark ? 'rgba(99,179,237,0.12)' : 'rgba(21,101,192,0.08)',
+              border: dark ? '1.5px solid rgba(99,179,237,0.25)' : '1.5px solid rgba(21,101,192,0.2)',
+              borderRadius: '50%',
+              width: 38,
+              height: 38,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'var(--color-primary)',
+              transition: 'all 0.25s ease',
+              flexShrink: 0,
+            }}
+          >
+            {dark ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
           <a
             href="mailto:anassreda88@gmail.com"
             className="btn-primary"
@@ -131,32 +159,51 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="hide-desktop"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--color-text-dark)',
-            padding: 4,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile controls */}
+        <div className="hide-desktop" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={toggle}
+            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            style={{
+              background: dark ? 'rgba(99,179,237,0.12)' : 'rgba(21,101,192,0.08)',
+              border: dark ? '1.5px solid rgba(99,179,237,0.25)' : '1.5px solid rgba(21,101,192,0.2)',
+              borderRadius: '50%',
+              width: 36,
+              height: 36,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'var(--color-primary)',
+            }}
+          >
+            {dark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--color-text-dark)',
+              padding: 4,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div
           style={{
-            background: 'rgba(255,255,255,0.96)',
+            background: dark ? 'rgba(10,10,26,0.97)' : 'rgba(255,255,255,0.96)',
             backdropFilter: 'blur(20px)',
-            borderTop: '1px solid rgba(255,255,255,0.4)',
+            borderTop: dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.4)',
             padding: '1.25rem 1.5rem 1.5rem',
             display: 'flex',
             flexDirection: 'column',
@@ -175,7 +222,7 @@ export default function Navbar() {
                 color: activeLink === link.href ? 'var(--color-primary)' : 'var(--color-text-dark)',
                 textDecoration: 'none',
                 padding: '0.5rem 0',
-                borderBottom: '1px solid rgba(0,0,0,0.06)',
+                borderBottom: dark ? '1px solid rgba(255,255,255,0.07)' : '1px solid rgba(0,0,0,0.06)',
               }}
             >
               {link.label}

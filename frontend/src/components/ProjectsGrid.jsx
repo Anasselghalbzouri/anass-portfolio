@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { getProjects } from '../services/api'
 import ProjectCard from './ProjectCard'
 import Sparkles from './Sparkles'
+import { useTheme } from '../context/ThemeContext'
 
 // Fallback data — matches Anass's real GitHub projects
 const FALLBACK_PROJECTS = [
@@ -65,7 +66,8 @@ const itemVariants = {
   },
 }
 
-export default function ProjectsGrid({ activeFilter }) {
+export default function ProjectsGrid() {
+  const { dark } = useTheme()
   const [projects, setProjects] = useState(FALLBACK_PROJECTS)
   const [loading, setLoading] = useState(false)
 
@@ -78,18 +80,6 @@ export default function ProjectsGrid({ activeFilter }) {
       .catch(() => { /* use fallback */ })
       .finally(() => setLoading(false))
   }, [])
-
-  // Filtering
-  const filtered = projects.filter((p) => {
-    const { tech, type, year, category } = activeFilter || {}
-    const techList = Array.isArray(p.tech_stack) ? p.tech_stack : p.tech_stack?.split(',') || []
-    const techMatch = !tech || tech === 'all' || techList.some(t => t.toLowerCase().trim().includes(tech))
-    // FIX [BUG #2]: normalise spaces so "full stack" (FilterBar) matches "fullstack" (DB) on both sides
-    const typeMatch = !type || type === 'all' || (p.type || '').toLowerCase().replace(/\s+/g, '').includes(type.replace(/\s+/g, ''))
-    const yearMatch = !year || year === 'all' || String(p.year) === String(year)
-    const catMatch  = !category || category === 'all' || (p.category || '').toLowerCase().includes(category.toLowerCase())
-    return techMatch && typeMatch && yearMatch && catMatch
-  })
 
   return (
     <section
@@ -161,22 +151,11 @@ export default function ProjectsGrid({ activeFilter }) {
                 style={{
                   height: 380,
                   borderRadius: 22,
-                  background: 'rgba(255,255,255,0.5)',
+                  background: dark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.5)',
                   animation: 'pulse-ring 1.5s ease-in-out infinite',
                 }}
               />
             ))}
-          </div>
-        ) : filtered.length === 0 ? (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '4rem 2rem',
-              color: 'var(--color-text)',
-            }}
-          >
-            <span style={{ fontSize: '3rem' }}>🔍</span>
-            <p style={{ marginTop: '1rem', fontSize: '1.1rem' }}>No projects match the selected filters.</p>
           </div>
         ) : (
           <motion.div
@@ -190,7 +169,7 @@ export default function ProjectsGrid({ activeFilter }) {
               gap: '1.75rem',
             }}
           >
-            {filtered.map((project, i) => (
+            {projects.map((project, i) => (
               <motion.div key={project.id} variants={itemVariants}>
                 <ProjectCard project={project} index={i} />
               </motion.div>

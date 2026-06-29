@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, MapPin, Code2, Layers, Star } from 'lucide-react'
 import Sparkles from './Sparkles'
+import { useTheme } from '../context/ThemeContext'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -12,6 +13,7 @@ const fadeUp = {
 }
 
 export default function Hero() {
+  const { dark } = useTheme()
   return (
     <section
       id="home"
@@ -44,7 +46,7 @@ export default function Hero() {
         style={{
           width: 420,
           height: 420,
-          background: 'rgba(232, 245, 233, 0.7)',
+          background: dark ? 'rgba(99, 179, 237, 0.05)' : 'rgba(232, 245, 233, 0.7)',
           bottom: '5%',
           right: '-10%',
           animationDelay: '3s',
@@ -55,7 +57,7 @@ export default function Hero() {
         style={{
           width: 300,
           height: 300,
-          background: 'rgba(227, 242, 253, 0.6)',
+          background: dark ? 'rgba(66, 153, 225, 0.06)' : 'rgba(227, 242, 253, 0.6)',
           top: '40%',
           right: '5%',
           animationDelay: '1.5s',
@@ -237,9 +239,9 @@ export default function Hero() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 10,
-                background: 'rgba(255,255,255,0.7)',
+                background: dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.7)',
                 backdropFilter: 'blur(16px)',
-                border: '1.5px solid rgba(21,101,192,0.18)',
+                border: dark ? '1.5px solid rgba(99,179,237,0.18)' : '1.5px solid rgba(21,101,192,0.18)',
                 borderRadius: 9999,
                 padding: '10px 22px',
                 fontSize: '0.85rem',

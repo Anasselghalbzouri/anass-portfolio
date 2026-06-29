@@ -1,5 +1,6 @@
 import { ExternalLink, Github, Calendar, Tag } from 'lucide-react'
 import TiltCard from './TiltCard'
+import { useTheme } from '../context/ThemeContext'
 
 const EMOJI_MAP = {
   'watch store': '🛍️',
@@ -25,6 +26,7 @@ const GRADIENT_PRESETS = [
 ]
 
 export default function ProjectCard({ project, index = 0 }) {
+  const { dark } = useTheme()
   const {
     title = 'Project',
     description = '',
@@ -188,16 +190,16 @@ export default function ProjectCard({ project, index = 0 }) {
                 gap: 6,
                 padding: '9px 0',
                 borderRadius: 12,
-                background: 'rgba(21,101,192,0.07)',
-                color: 'var(--color-primary)',
+                background: dark ? 'rgba(99,179,237,0.12)' : 'rgba(21,101,192,0.07)',
+                color: dark ? '#fff' : 'var(--color-primary)',
                 textDecoration: 'none',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                border: '1px solid rgba(21,101,192,0.15)',
+                border: dark ? '1px solid rgba(99,179,237,0.3)' : '1px solid rgba(21,101,192,0.15)',
                 transition: 'all 0.2s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(21,101,192,0.14)'; e.currentTarget.style.borderColor = 'rgba(21,101,192,0.3)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(21,101,192,0.07)'; e.currentTarget.style.borderColor = 'rgba(21,101,192,0.15)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = dark ? 'rgba(99,179,237,0.22)' : 'rgba(21,101,192,0.14)'; e.currentTarget.style.borderColor = dark ? 'rgba(99,179,237,0.5)' : 'rgba(21,101,192,0.3)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = dark ? 'rgba(99,179,237,0.12)' : 'rgba(21,101,192,0.07)'; e.currentTarget.style.borderColor = dark ? 'rgba(99,179,237,0.3)' : 'rgba(21,101,192,0.15)' }}
             >
               <Github size={14} />
               Code

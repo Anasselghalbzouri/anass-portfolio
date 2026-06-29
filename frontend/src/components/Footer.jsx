@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const LINKS = [
   { label: 'Home',     href: '#home' },
@@ -8,12 +9,13 @@ const LINKS = [
 ]
 
 export default function Footer() {
+  const { dark } = useTheme()
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <footer
       style={{
-        background: 'var(--color-text-dark)',
+        background: dark ? '#07070F' : '#1A1A2E',
         color: 'rgba(255,255,255,0.75)',
         padding: '3rem 0 2rem',
         position: 'relative',
